@@ -1,7 +1,7 @@
 import {dispatch} from "d3-dispatch";
 import {dragDisable, dragEnable} from "d3-drag";
 import {interpolate} from "d3-interpolate";
-import {customEvent, event, mouse, select} from "d3-selection";
+import {customEvent, event, mouse, select, manual} from "d3-selection";
 import {interrupt} from "d3-transition";
 import constant from "./constant";
 import BrushEvent from "./event";
@@ -186,6 +186,14 @@ function brush(dim) {
         .on("mousedown.brush touchstart.brush", started);
   }
 
+  brush.start = function(group, passedEvent) {
+    group
+      .each(function() {
+        manual(passedEvent);
+        started.apply(this, [undefined, 0, [this]])
+      });
+  };
+
   brush.move = function(group, selection) {
     if (group.selection) {
       group
@@ -293,7 +301,7 @@ function brush(dim) {
     if (!filter.apply(this, arguments)) return;
 
     var that = this,
-        type = event.target.__data__.type,
+        type = (event.desiredTarget || event.target).__data__.type,
         mode = (event.metaKey ? type = "overlay" : type) === "selection" ? MODE_DRAG : (event.altKey ? MODE_CENTER : MODE_HANDLE),
         signX = dim === Y ? null : signsX[type],
         signY = dim === X ? null : signsY[type],
