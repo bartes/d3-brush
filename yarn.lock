@@ -216,8 +216,8 @@ d3-selection@1, d3-selection@^1.1.0:
   resolved "https://registry.yarnpkg.com/d3-selection/-/d3-selection-1.3.2.tgz#6e70a9df60801c8af28ac24d10072d82cbfdf652"
 
 "d3-selection@git://github.com/bartes/d3-selection.git":
-  version "1.3.2"
-  resolved "git://github.com/bartes/d3-selection.git#845b415c10d30531deb634adc4a413f827a7c174"
+  version "1.4.0"
+  resolved "git://github.com/bartes/d3-selection.git#18306d176241f2ab14a8b085fad636e0834ed8ed"
 
 d3-timer@1:
   version "1.0.9"
